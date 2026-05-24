@@ -6,8 +6,12 @@ const LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbwpuh7IwXeQcN_Xwu
 
 const leadForm = document.getElementById("leadForm");
 const formStatus = document.getElementById("formStatus");
-const successPanel = document.getElementById("successPanel");
+const interestModal = document.getElementById("interestModal");
+const interestModalDialog = interestModal?.querySelector(".modal-dialog") || null;
+const interestModalClose = document.getElementById("interestModalClose");
+const interestModalAction = document.getElementById("interestModalAction");
 const year = document.getElementById("year");
+let lastFocusedElement = null;
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -45,7 +49,27 @@ function setSubmitting(isSubmitting) {
   if (!submitButton) return;
 
   submitButton.disabled = isSubmitting;
-  submitButton.textContent = isSubmitting ? "Saving..." : "Join early access list";
+  submitButton.textContent = isSubmitting ? "Submitting..." : "Purchase";
+}
+
+function openInterestModal() {
+  if (!interestModal || !interestModalDialog) return;
+
+  lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  interestModal.hidden = false;
+  document.body.classList.add("modal-open");
+  interestModalDialog.focus({ preventScroll: true });
+}
+
+function closeInterestModal() {
+  if (!interestModal) return;
+
+  interestModal.hidden = true;
+  document.body.classList.remove("modal-open");
+
+  if (lastFocusedElement) {
+    lastFocusedElement.focus({ preventScroll: true });
+  }
 }
 
 async function submitLead(payload) {
@@ -76,7 +100,7 @@ async function submitLead(payload) {
 
   return {
     saved: true,
-    message: "Thanks — your early access request has been received."
+    message: "Your purchase request has been received."
   };
 }
 
@@ -98,6 +122,23 @@ document.querySelectorAll('a[href="#reserve"]').forEach((element) => {
   });
 });
 
+if (interestModal) {
+  interestModal.addEventListener("click", (event) => {
+    if (event.target === interestModal) {
+      closeInterestModal();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !interestModal.hidden) {
+      closeInterestModal();
+    }
+  });
+}
+
+interestModalClose?.addEventListener("click", closeInterestModal);
+interestModalAction?.addEventListener("click", closeInterestModal);
+
 if (leadForm) {
   leadForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -107,25 +148,24 @@ if (leadForm) {
     const payload = {
       timestamp: new Date().toISOString(),
       email: String(formData.get("email") || "").trim(),
-      useCase: String(formData.get("useCase") || "").trim(),
-      region: String(formData.get("region") || "").trim(),
-      payIntent: String(formData.get("payIntent") || "").trim(),
-      requiredFields: String(formData.get("requiredFields") || "").trim(),
-      consent: Boolean(formData.get("consent")),
+      useCase: "",
+      region: "",
+      payIntent: "Yes",
+      requiredFields: "",
+      consent: true,
       pageUrl: window.location.href,
       userAgent: navigator.userAgent,
       traffic: getTrafficSource()
     };
 
-    if (!payload.email || !payload.useCase || !payload.region || !payload.payIntent || !payload.consent) {
-      showStatus("Please complete the required fields before submitting.", "warning");
+    if (!payload.email) {
+      showStatus("Please enter your email address before submitting.", "warning");
       return;
     }
 
     setSubmitting(true);
     track("form_submit_attempt", {
-      region: payload.region,
-      use_case: payload.useCase,
+      flow: "email_only_purchase_interest",
       pay_intent: payload.payIntent
     });
 
@@ -133,24 +173,21 @@ if (leadForm) {
       const result = await submitLead(payload);
 
       track("form_submit", {
-        region: payload.region,
-        use_case: payload.useCase,
+        flow: "email_only_purchase_interest",
         pay_intent: payload.payIntent,
         saved_to_sheet: result.saved ? "yes" : "no"
       });
 
-      if (payload.payIntent === "Yes") {
-        track("price_interest_yes", {
-          region: payload.region,
-          use_case: payload.useCase
-        });
-      }
+      track("price_interest_yes", {
+        flow: "email_only_purchase_interest"
+      });
 
       leadForm.reset();
-      leadForm.hidden = true;
-      successPanel.hidden = false;
       showStatus(result.message, result.saved ? "success" : "warning");
-      window.location.hash = "request-received";
+
+      if (result.saved) {
+        openInterestModal();
+      }
     } catch (error) {
       console.error(error);
       track("form_submit_error", {

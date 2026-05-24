@@ -326,8 +326,7 @@ tbody tr:last-child td {
   align-items: start;
 }
 
-.lead-form,
-.success-panel {
+.lead-form {
   padding: 26px;
   background: var(--surface);
   border: 1px solid var(--line);
@@ -408,8 +407,48 @@ textarea:focus {
   border: 1px solid rgba(29, 92, 67, 0.20);
 }
 
-.success-panel {
-  background: var(--success-bg);
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(24, 34, 30, 0.45);
+}
+
+.modal-dialog {
+  width: min(100%, 520px);
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.modal-dialog h2 {
+  margin-top: 0;
+}
+
+.modal-close {
+  display: inline-flex;
+  margin-left: auto;
+  margin-bottom: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: var(--text);
 }
 
 .faq-list {
@@ -481,6 +520,10 @@ details p {
 
   .site-footer {
     flex-direction: column;
+  }
+
+  .modal-backdrop {
+    padding: 18px;
   }
 }
 

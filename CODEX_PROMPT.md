@@ -1,6 +1,6 @@
 # Codex Prompt for Future Edits
 
-You are editing a static GitHub Pages landing page for a planned product called "Ontario Business Database CSV".
+You are editing a static GitHub Pages landing page for a product called "Ontario Business Database CSV".
 
 Goal:
 - Keep the site static and deployable on GitHub Pages.
@@ -25,15 +25,14 @@ Current files:
 Product positioning:
 - Downloadable Ontario business database.
 - CSV format.
-- Planned launch price: C$15.
-- No payment collected today.
-- The page validates interest and collects email before real database delivery exists.
+- The page should present the database like a ready product.
+- The page collects only email before showing the post-submit preparation notice.
 
 Important UX rules:
-- Do not say "Pay now".
-- Use "Reserve early access" or "Join early access list".
-- Be transparent that no payment is collected today.
 - Keep the CTA focused on purchase intent.
+- The form submit button may use "Purchase".
+- Do not mention planned pricing or pre-launch status in visible page copy.
+- Reveal that database preparation is still in progress only after submit, inside the popup.
 - Keep the page credible and simple.
 
 Tracking requirements:
@@ -45,11 +44,6 @@ Tracking requirements:
 
 Lead form fields:
 - Email
-- Use case
-- Region
-- Pay intent
-- Required fields
-- Consent checkbox
 
 When making changes:
 1. Preserve accessibility labels.

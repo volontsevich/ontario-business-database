@@ -1,11 +1,11 @@
 # Ontario Business Database Landing Page
 
-A simple zero-cost validation website for a planned downloadable Ontario Business Database CSV.
+A simple static website for collecting purchase requests for the Ontario Business Database CSV.
 
 ## What this includes
 
 - Static landing page for GitHub Pages
-- Lead capture form
+- Email-only purchase interest form
 - Google Analytics event tracking hooks
 - Google Apps Script endpoint for saving leads to Google Sheets
 - SEO basics: title, description, sitemap, robots.txt, FAQ schema, product schema
@@ -182,11 +182,11 @@ Open the live page and submit a test lead.
 
 Check that:
 
-- the thank-you message appears;
+- the confirmation popup appears;
 - the lead appears in Google Sheets;
 - GA4 receives events;
 - the page works on mobile.
 
 ## Important legal/compliance note
 
-This MVP collects emails and validates interest. Before sending marketing emails or selling a database, make sure your collection and communication process follows Canadian privacy and anti-spam requirements. Use clear consent, identify yourself, and include an unsubscribe option in future emails.
+This MVP collects emails through a purchase-style flow. Before sending marketing emails or fulfillment updates, make sure your collection and communication process follows Canadian privacy and anti-spam requirements. Identify yourself clearly and include an unsubscribe option where required.
