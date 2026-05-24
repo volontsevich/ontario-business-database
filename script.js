@@ -112,7 +112,7 @@ document.querySelectorAll("[data-track]").forEach((element) => {
   });
 });
 
-document.querySelectorAll('a[href="#reserve"]').forEach((element) => {
+document.querySelectorAll('a[href="#purchase"]').forEach((element) => {
   element.addEventListener("click", () => {
     const emailInput = document.getElementById("email");
 
