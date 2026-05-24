@@ -421,6 +421,10 @@ body.modal-open {
   background: rgba(24, 34, 30, 0.45);
 }
 
+.modal-backdrop[hidden] {
+  display: none;
+}
+
 .modal-dialog {
   width: min(100%, 520px);
   padding: 26px;
