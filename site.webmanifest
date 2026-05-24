@@ -1,0 +1,16 @@
+{
+  "name": "Ontario Business Database",
+  "short_name": "ON Business DB",
+  "description": "Early access page for a planned downloadable Ontario Business Database CSV.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f7f4ee",
+  "theme_color": "#1d5c43",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

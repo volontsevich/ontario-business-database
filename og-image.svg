@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f7f4ee"/>
+  <rect x="70" y="70" width="1060" height="490" rx="38" fill="#ffffff" stroke="#ded7cc"/>
+  <text x="110" y="170" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#1d5c43">Early access · CSV · C$15 planned price</text>
+  <text x="110" y="285" font-family="Arial, sans-serif" font-size="76" font-weight="800" fill="#18221e">Ontario Business</text>
+  <text x="110" y="370" font-family="Arial, sans-serif" font-size="76" font-weight="800" fill="#18221e">Database CSV</text>
+  <text x="110" y="455" font-family="Arial, sans-serif" font-size="34" fill="#5f6f66">For market research, outreach planning, and local business analysis.</text>
+  <rect x="880" y="150" width="170" height="170" rx="34" fill="#1d5c43"/>
+  <text x="965" y="255" text-anchor="middle" font-family="Arial, sans-serif" font-size="62" font-weight="800" fill="#ffffff">ON</text>
+</svg>
