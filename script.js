@@ -1,4 +1,4 @@
-// Ontario Business Database landing page logic.
+// Ontario Business Intelligence Database landing page logic.
 // 1) Replace LEAD_ENDPOINT with your deployed Google Apps Script Web App URL.
 // 2) Replace GA4 ID in index.html from G-XXXXXXXXXX to your real GA4 Measurement ID.
 
@@ -49,7 +49,7 @@ function setSubmitting(isSubmitting) {
   if (!submitButton) return;
 
   submitButton.disabled = isSubmitting;
-  submitButton.textContent = isSubmitting ? "Submitting..." : "Purchase";
+  submitButton.textContent = isSubmitting ? "Submitting..." : "Continue purchase";
 }
 
 function openInterestModal() {
@@ -100,7 +100,7 @@ async function submitLead(payload) {
 
   return {
     saved: true,
-    message: "Your purchase request has been received."
+    message: "Your purchase request has been recorded."
   };
 }
 
